@@ -1,62 +1,330 @@
-[Project]
-FileName=HANOITOWERGAME.dev
-Name=HANOITOWERGAME
-Type=1
-Ver=2
-ObjFiles=
-Includes=
-Libs=
-PrivateResource=
-ResourceIncludes=
-MakeIncludes=
-Compiler=
-CppCompiler=
-Linker=
-IsCpp=1
-Icon=
-ExeOutput=
-ObjectOutput=
-LogOutput=
-LogOutputEnabled=0
-OverrideOutput=0
-OverrideOutputName=
-HostApplication=
-UseCustomMakefile=0
-CustomMakefile=
-CommandLine=
-Folders=
-IncludeVersionInfo=0
-SupportXPThemes=0
-CompilerSet=0
-CompilerSettings=0000000000000000000000000
-UnitCount=1
+#include <iostream>
+#include<cmath>
+using namespace std;
+void display();
+void displa();
+int step=0;
+int score=0;
+int n;
+struct node1
+{
+    int data1;
+    node1 *next1;
+};
+node1*top1 = NULL; 
+struct node2
+{
+    int data2;
+    node2 *next2;
+};
+node2*top2 = NULL;
+struct node3
+{
+    int data3;
+    node3 *next3;
+};
+node3*top3 = NULL;
+void clearTowers(){
+while(top1!=NULL){
+node1*temp=top1;
+top1=top1->next1;
+delete temp;	
+	
+}	
+while(top2!=NULL){
+node2*temp=top2;
+top2=top2->next2;
+delete temp;	
+	
+}
+while(top3!=NULL){
+node3*temp=top3;
+top3=top3->next3;
+delete temp;	
+	
+}	
+	
+}
+void display1()
+{
 
-[VersionInfo]
-Major=1
-Minor=0
-Release=0
-Build=0
-LanguageID=1033
-CharsetID=1252
-CompanyName=
-FileVersion=
-FileDescription=Developed using the Dev-C++ IDE
-InternalName=
-LegalCopyright=
-LegalTrademarks=
-OriginalFilename=
-ProductName=
-ProductVersion=
-AutoIncBuildNr=0
-SyncProduct=1
+    cout<<endl;
+    node1 *p1=top1;
+    cout<<"Tower1-> "<<"\t";
+    while (p1 != NULL)
+    {
+        cout<<p1->data1<<"\t";
+        p1 = p1->next1;
+    }
+    cout<<endl;
+}
+void display2()
+{
+    node2 *p2 = top2;
+    cout<<"Tower2-> "<<"\t";
+    while (p2 != NULL)
+    {
+        cout<<p2->data2<<"\t";
+        p2 = p2->next2;
+    }
+    cout<<endl;
+}
+void display3()
+{
+    node3 *p3 = top3;
+    cout<<"Tower3-> "<<"\t";
+    while (p3 != NULL)
+    {
+        cout<<p3->data3<<"\t";
+        p3 = p3->next3;
+    }
+    cout<<endl;
+    cout<<endl;
+}
+void push1(int data)
+{
+    node1*np1 = new node1();
+    np1->data1 = data;
+    np1->next1 = NULL;
+    if (top1 == NULL)
+    {
+        top1 = np1;
+    }
+    else
+    {
+       if(np1->data1<top1->data1){
+	     np1->next1 = top1;
+        top1 = np1;
+		}
+     if(np1->data1>top1->data1){
+	 
+	 cout<<"THE GAME OVER \n";
+	 clearTowers();
+	 displa();
+	 
+}
+    }
+   
+}
+int pop1()
+{
+    
+    if(top1!=NULL)
+    {
+    	step=step+1;
+        node1*p1 = top1;
+        top1 = top1->next1;
+        return(p1->data1);
+        delete(p1);
+    
+    }
+    else{
+	
+    cout<<"TOWER1 is empty you can't remove\n";
+    display();}
+}
+void push2(int data)
+{
+    node2*np2 = new node2();
+    np2->data2 = data;
+    np2->next2 = NULL;
+    if (top2 == NULL)
+    {
+        top2 = np2;
+    }
+    else
+    {
+    if(np2->data2<top2->data2){
+		
+        np2->next2 = top2;
+        top2 = np2;
+		}
+	else{
+	
+	cout<<"THE GAME OVER!!!!!!!!!!!!!!\n";
+	clearTowers();
+	displa();
+	
+	}
+    }
+}
+int pop2()
+{
+    
+    if(top2!=NULL)
+    {
+    	step=step+1;
+       node2*p2 = top2;
+        top2 = top2->next2;
+        return(p2->data2);
+        delete(p2);
+        
+    }
+    else{
+	
+    cout<<"TOWER2 is empty you can't remove\n";
+    display();}
+}
+void push3(int data)
+{
+    node3*np3 = new node3();
+    np3->data3 = data;
+    np3->next3 = NULL;
+    if (top3 == NULL)
+    {
+        top3 = np3;
+    
+    }
+    else
+    {
+    	 if(np3->data3<top3->data3){
+        np3->next3 = top3;
+        top3 = np3;
+        if(top1==NULL && top2==NULL){
+        cout<<"CONGRATULATIONS YOU WIN GAME\n";
+        cout<<"YOU FINNISHED THE GAME WITH "<<step<<" MOVEMENT\n";
+		if(step<=(pow(2,n)-1)){
+		score=2*n+(n/2);
+		cout<<"****************************************\n";
+		cout<<"****************************************\n";
+		cout<<"******   SCORE =  "<<score<<"*********************\n";	
+		cout<<"****************************************\n";
+		cout<<"****************************************\n";
+		}
+		else if(step>(pow(2,n)-1)){
+		score=2*n-(n/2);
+		cout<<"****************************************\n";
+		cout<<"****************************************\n";
+		cout<<"******   SCORE =  "<<score<<"*********************\n";	
+		cout<<"****************************************\n";
+		cout<<"****************************************\n";	
+		}	
+        displa();
+		}
+    }
+    else{
+	
+    cout<<"THE GAME OVER\n";
+    clearTowers();
+    displa();
+	
+	}
+    }
+    
+}
+int pop3()
+{
+    if(top3!=NULL)
+    {
+    	step=step+1;
+        node3*p3 = top3;
+        top3 = top3->next3;
+        return(p3->data3);
+        delete(p3);
+        
+    }
+    else{
+	
+    cout<<"TOWER3 is empty you can't remove\n";
+    display();}
+}
 
-[Unit1]
-FileName=HANOI1234.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
+void display(){
+int x;
+display1();
+ display2();
+ display3();
+
+cout<<"******************************************************************\n";
+cout<<"************      12. TO MOVE FROM TOWER 1 TO TOWER 2  ***********\n";
+cout<<"************      13. TO MOVE FROM TOWER 1 TO TOWER 3  ***********\n";
+cout<<"************      21. TO MOVE FROM TOWER 2 TO TOWER 1  ***********\n";
+cout<<"************      23. TO MOVE FROM TOWER 2 TO TOWER 3  ***********\n";
+cout<<"************      31. TO MOVE FROM TOWER 3 TO TOWER 1  ***********\n";
+cout<<"************      32. TO MOVE FROM TOWER 3 TO TOWER 2  ***********\n";
+cout<<"************      0 . TO QUIT THE GAME                 ***********\n";
+cout<<"******************************************************************\n";
+cout<<"*********************#################****************************\n";
+ cout<<"\n*********************ENTER YOUR CHOICE****************************\n";
+cin>>x;
+
+while(x!=0){
+	switch(x){
+case 12:
+push2(pop1());	
+break;
+case 13:
+push3(pop1());
+break;
+case 21:
+push1(pop2());
+break;
+case 23:
+push3(pop2());
+break;
+case 31:
+push1(pop3());
+break;
+case 32:
+push2(pop3());	
+break;
+case 0:
+	cout<<"YOU QUIT THE GAME \n";
+	exit(1);
+default:
+	cout<<"WRONG CHOICE PLEASE ENTER THE CORRECT CHOICE\n";
+	
+	
+}	
+display();	
+x;	
+}	
+	
+}
+void displa(){
+	int y;
+cout<<"*********************************************************************\n";
+cout<<"************      1.  TO START THE GAME           *******************\n";
+cout<<"************      2.  TO EXIT                     *******************\n";
+cout<<"*********************************************************************\n";
+cout<<"\n*********************ENTER YOUR CHOICE****************************\n";
+cin>>y;
+while(y!=2){
+switch(y){
+case 1:
+	int  i;
+
+    cout<<"enter the number of disks\n";
+    cin>>n;
+    if(n>0){
+	
+    for (i = n; i >= 1; i--)
+    {
+        push1(i);
+    } 
+}
+else{
+
+cout<<"wrong input\n";
+displa();
+return;
+
+}
+display();	
+
+break;
+default:
+cout<<"WRONG CHOICE PLEASE ENTER THE CORRECT CHOICE\n";	
+	
+}	
+		
+	
+}
+	
+}
+int main() {
+		cout<<"WELCOME TO HANOI TOWER GAME\n";
+    displa();
+	return 0;
+}
 
